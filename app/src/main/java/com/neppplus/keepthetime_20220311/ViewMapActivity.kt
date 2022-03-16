@@ -136,6 +136,17 @@ class ViewMapActivity : BaseActivity() {
                         path.coords = stationList
                         path.map = naverMap
 
+//                        파싱을 추가로 하면, 소요시간 / 비용 정보도 얻을 수 있다. => infoWindow에 결합.
+
+                        val infoObj = firstPathObj.getJSONObject("info")
+
+                        val minutes = infoObj.getInt("totalTime")
+                        val payment = infoObj.getInt("payment")
+
+                        val infoStr = "이동 시간 : ${minutes}분, 비용 : ${payment}원"
+
+
+
 
                     }
 
