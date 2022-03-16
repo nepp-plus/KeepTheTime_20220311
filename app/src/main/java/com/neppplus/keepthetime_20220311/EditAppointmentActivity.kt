@@ -328,6 +328,22 @@ class EditAppointmentActivity : BaseActivity() {
                             path!!.coords = stationLatLngList
                             path!!.map = naverMap
 
+//                            (첫번째 추천 경로의) 정보 항목도 파싱.
+//                            예상 소요 시간 파싱 => 임시로 토스트 출력.
+
+                            val infoObj = firstPathObj.getJSONObject("info")
+
+                            val totalTime = infoObj.getInt("totalTime") // 소요 분
+
+                            val payment = infoObj.getInt("payment") // 소요 비용
+
+                            Toast.makeText(
+                                mContext,
+                                "시간 : ${totalTime}분, 비용 : ${payment}원",
+                                Toast.LENGTH_SHORT
+                            ).show()
+
+
                         }
 
                         override fun onError(p0: Int, p1: String?, p2: API?) {
