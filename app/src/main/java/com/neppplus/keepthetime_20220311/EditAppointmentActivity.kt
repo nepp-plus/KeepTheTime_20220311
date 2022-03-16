@@ -118,6 +118,11 @@ class EditAppointmentActivity : BaseActivity() {
                     response: Response<BasicResponse>
                 ) {
 
+                    if (response.isSuccessful) {
+                        Toast.makeText(mContext, "약속을 등록했습니다.", Toast.LENGTH_SHORT).show()
+                        finish()
+                    }
+
                 }
 
                 override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
