@@ -59,6 +59,42 @@ class SignInActivity : BaseActivity() {
 
                             Log.d("받아온정보", jsonObj!!.toString())
 
+//                            우리 API 서버에 전달.
+                            apiList.postRequestSocialLogin(
+                                "facebook",
+                                jsonObj.getString("id"),
+                                jsonObj.getString("name")
+                            ).enqueue(object : Callback<BasicResponse> {
+                                override fun onResponse(
+                                    call: Call<BasicResponse>,
+                                    response: Response<BasicResponse>
+                                ) {
+                                    if (response.isSuccessful) {
+
+                                        val br = response.body()!!
+
+                                        ContextUtil.setLoginUserToken(mContext, br.data.token)
+
+                                        Toast.makeText(
+                                            mContext,
+                                            "${br.data.user.nick_name}님, 페북 로그인을 환영합니다!",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+
+                                        val myIntent = Intent(mContext, MainActivity::class.java)
+                                        startActivity(myIntent)
+
+                                        finish()
+
+                                    }
+                                }
+
+                                override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+                                }
+
+                            })
+
                         }
 
                     })
