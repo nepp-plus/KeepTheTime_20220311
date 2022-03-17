@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil
 import com.neppplus.keepthetime_20220311.databinding.ActivityManagePlacesBinding
 import com.neppplus.keepthetime_20220311.datas.BasicResponse
 import com.neppplus.keepthetime_20220311.datas.PlaceData
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -41,6 +42,16 @@ class ManagePlacesActivity : BaseActivity() {
 
         apiList.getRequestMyPlaceList().enqueue(object : Callback<BasicResponse> {
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
+
+                if (response.isSuccessful) {
+
+                    val br = response.body()!!
+
+                    mPlaceList.clear()
+
+                    mPlaceList.addAll( br.data.places )
+
+                }
 
             }
 
