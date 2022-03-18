@@ -23,6 +23,7 @@ import java.util.*
 
 class SignInActivity : BaseActivity() {
 
+//    바인딩변수 생성
     lateinit var binding: ActivitySignInBinding
 
 //    페북로그인 화면에 다녀오면, 할일을 관리해주는 변수.
@@ -30,6 +31,7 @@ class SignInActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //  데이터바인딩의 setContentView
         binding = DataBindingUtil.setContentView(this, R.layout.activity_sign_in)
         setupEvents()
         setValues()
