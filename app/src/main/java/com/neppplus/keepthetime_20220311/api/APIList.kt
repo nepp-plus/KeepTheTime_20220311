@@ -1,6 +1,7 @@
 package com.neppplus.keepthetime_20220311.api
 
 import com.neppplus.keepthetime_20220311.datas.BasicResponse
+import okhttp3.MultipartBody
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.http.*
@@ -97,5 +98,12 @@ interface APIList {
         @Field("nick_name") nickname: String,
     ) : Call<BasicResponse>
 
+//    프로필 사진 첨부 => 파라미터에 파일이 있다 : Field 대신, Multipart 활용
+
+    @Multipart
+    @PUT("/user/image")
+    fun putRequestProfileImg(
+        @Part img: MultipartBody.Part
+    ) : Call<BasicResponse>
 
 }
